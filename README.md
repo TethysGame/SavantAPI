@@ -2,7 +2,21 @@
 
 SavantAPI is the contract for Outpost 2 implementations.
 
-An implementation is one version of the game. The GOG executable, that executable with the OPU 1.4.1 patches, the classic rebuild (OP2CL), the community rebuild (OP2CE), and later ports each keep their own code. This repository names the shared words those implementations use, so the same play can run on each of them and the recordings can be compared.
+An **implementation** is one program that can run a play. It is not a version number. The GOG executable, that executable with the OPU patches, the classic rebuild (`op2cl`), the community rebuild (`op2ce`), and a later port each keep their own code. This repository names the shared words those implementations use, so the same play can run on each of them and the recordings can be compared.
+
+The version of the behavior is the **ruleset**: `1.2.0.7`, `1.4.1`, and later numbers such as `1.5`. Two implementations can share a ruleset. `gog` and `op2cl` both follow `1.2.0.7`. `opu` and `op2ce` both follow `1.4.1`. A new ruleset does not make a new implementation: `op2ce` on ruleset `1.5` is still `op2ce`.
+
+## Implementations
+
+| Implementation | Kind | Ruleset | Where it is named today |
+|---|---|---|---|
+| `gog` | original | `1.2.0.7` | the GOG 1.2.0.7 executable |
+| `opu` | patched | `1.4.1` | that executable with the OPU 1.4.1 patches applied at run time |
+| `op2cl` | rebuild | `1.2.0.7` | the matching build in the remake |
+| `op2ce` | rebuild | `1.4.1`, then `1.5` and on | the community EXE in the remake |
+| a port's own name, such as `op2-rs` | port | the ruleset it claims | that project |
+
+A **port** is one kind of implementation: a rewrite in another codebase. `op2cl` and `op2ce` are rebuilds of this game's code, so the contract does not call them ports.
 
 The words are listed here first. Schemas for them land in this repository as each surface is written. Each surface is versioned on its own.
 
@@ -14,7 +28,7 @@ A savant is one seat at that play: it is shown an observation and it answers wit
 
 - **Map document.** [OP2MapJsonTools](https://github.com/leviathan400/OP2MapJsonToolsLibrary) owns the JSON. [OP2Utility](https://github.com/OutpostUniverse/OP2Utility) owns the `.map` binary. [OP2MapperQt](https://github.com/leviathan400/OP2MapperQt) edits both. This repository names that JSON as the map. It does not keep a second copy of the format.
 - **Windows adapter.** [OP2TestHarness](https://github.com/TethysGame/OP2TestHarness) loads inside the original executable and speaks this contract for that process. The verb names below are the ones that adapter already runs.
-- **Other implementations.** OP2CL, OP2CE, and any Rust, Python, Node, or WebAssembly port keep their own code and depend on this repository.
+- **Other implementations.** `op2cl`, `op2ce`, and any Rust, Python, Node, or WebAssembly port keep their own code and depend on this repository.
 
 ## Reading order
 
@@ -24,8 +38,8 @@ The map and the other nouns come first. Orders are verbs over those nouns. A gam
 
 ### Who is playing
 
-- **Implementation.** Which program ran the play: `gog`, `opu-1.4.1`, `op2cl`, `op2ce`, or a port's name. Two implementations can play one gameplay.
-- **Ruleset.** Which behavior that build is expected to follow. A 1.4.1 run is a different ruleset from a GOG run, so a difference that the patch intends is not a failed comparison.
+- **Implementation.** Which program ran the play. The ids are in [Implementations](#implementations). Two implementations can play one gameplay.
+- **Ruleset.** Which behavior that implementation is expected to follow. A `1.4.1` run is a different ruleset from a `1.2.0.7` run, so a difference that the patch intends is not a failed comparison.
 - **Surface version.** The version of one contract surface (nouns, verbs, map, harness, savant). A change to the meaning of a field is a new version of that surface.
 - **Seat.** One player slot in the play. The occupant is a human or a savant.
 - **Player.** The colony in that seat: id, human or AI, Eden or Plymouth, and color.

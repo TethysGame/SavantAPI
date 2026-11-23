@@ -6,18 +6,6 @@ An **implementation** is one program that can run a play. It is not a version nu
 
 The version of the behavior is the **ruleset**: `1.2.0.7`, `1.4.1`, and later numbers such as `1.5`. Two implementations can share a ruleset. `gog` and `op2cl` both follow `1.2.0.7`. `opu` and `op2ce` both follow `1.4.1`. A new ruleset does not make a new implementation: `op2ce` on ruleset `1.5` is still `op2ce`.
 
-## Implementations
-
-| Implementation | Kind | Ruleset | Where it is named today |
-|---|---|---|---|
-| `gog` | original | `1.2.0.7` | the GOG 1.2.0.7 executable |
-| `opu` | patched | `1.4.1` | that executable with the OPU 1.4.1 patches applied at run time |
-| `op2cl` | rebuild | `1.2.0.7` | the matching build in the remake |
-| `op2ce` | rebuild | `1.4.1`, then `1.5` and on | the community EXE in the remake |
-| a port's own name, such as `op2-rs` | port | the ruleset it claims | that project |
-
-A **port** is one kind of implementation: a rewrite in another codebase. `op2cl` and `op2ce` are rebuilds of this game's code, so the contract does not call them ports.
-
 The words are listed here first. Schemas for them land in this repository as each surface is written. Each surface is versioned on its own.
 
 One repository holds the contract for now. The map document already has a home, and each game stays in its own repository. Those splits are described under [Where the other pieces live](#where-the-other-pieces-live).
@@ -38,7 +26,7 @@ The map and the other nouns come first. Orders are verbs over those nouns. A gam
 
 ### Who is playing
 
-- **Implementation.** Which program ran the play. The ids are in [Implementations](#implementations). Two implementations can play one gameplay.
+- **Implementation.** Which program ran the play. Two implementations can play one gameplay.
 - **Ruleset.** Which behavior that implementation is expected to follow. A `1.4.1` run is a different ruleset from a `1.2.0.7` run, so a difference that the patch intends is not a failed comparison.
 - **Surface version.** The version of one contract surface (nouns, verbs, map, harness, savant). A change to the meaning of a field is a new version of that surface.
 - **Seat.** One player slot in the play. The occupant is a human or a savant.
